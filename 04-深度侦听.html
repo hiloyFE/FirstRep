@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="./js/vue2.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <input type="text" v-model='obj.first'>
+            <input type="text" v-model='obj.second'>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    obj:{
+                        first:'1',
+                        second:'1'
+                    }
+                },
+                // 侦听对象中的属性值的变化
+                watch: {
+                    // 如果直接侦听一个对象的属性值的变化，那么下面这个方式无法实现
+                    // obj(){
+                    //     console.log(1)
+                    // }
+                    // 如果希望能够侦听到对象的成员值的变化那么就需要使用到深度侦听
+                    // 1.第一种写法
+                    // obj:{
+                    //     // 添加一个handler函数,这个函数会在对象的任何一个成员值发生变化的时候触发
+                    //     handler(){
+                    //         console.log(123)
+                    //     },
+                    //     // 设置当前侦听为深度侦听
+                    //     deep:true
+                    // }
+                    // 上面这种写法的缺点在于：只要修改任何一个成员的值都会触发这个操作，如果我们只需要其中一个值变化的时候触发操作，那么怎么办？
+                    // 2.第二种写法
+                    'obj.first'(v,old){
+                        console.log(v,old)
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
